@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Magazynowy - Lista productów </title>
+    <title>System Magazynowy - Lista produktów </title>
 </head>
 <body>
-    <h1>Lista productów</h1>
+    <h1>Lista produktów</h1>
     <p><a href="/movements/">Historia ruchów magazynowych</a></p>
 
     <table border="1">
@@ -22,7 +22,7 @@
             {% for product in products %}
             <tr>
                 <td>{{ product.name }}</td>
-                <td>{{ product.sku }}.</td>
+                <td>{{ product.sku }}</td>
                 <td>{{ product.description }}</td> 
                 <td>
                     {% if product.current_stock >= 5 %}
