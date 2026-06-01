@@ -8,7 +8,6 @@ def product_list(request):
     return render(request, 'inventory/product_list.html', {'products': products})
 
 def stock_movement_list(request):
-    # NAPRAWIONE: U Ciebie pole to created_at, a nie timestamp!
     movements = StockMovement.objects.all().order_by('-created_at')
     return render(request, 'inventory/stock_movement_list.html', {'movements': movements})
 
