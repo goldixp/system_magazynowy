@@ -1,5 +1,5 @@
 from django import forms
-from .models import StockMovement
+from .models import StockMovement, Product
 
 class StockMovementForm(forms.ModelForm):
     class Meta:
@@ -24,3 +24,8 @@ class StockMovementForm(forms.ModelForm):
                 )
         
         return cleaned_data
+    
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'current_stock'] 

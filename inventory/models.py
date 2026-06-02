@@ -8,13 +8,24 @@ class Product(models.Model):
     sku = models.CharField(max_length=50, unique=True) 
     description = models.TextField(blank=True, null=True, verbose_name="Opis produktu")
     current_stock = models.IntegerField(default=0, verbose_name="Aktualny stan magazynowy")
-
+    
     def __str__(self):
         return f"{self.name} ({self.sku})"
+    def save(self, *args, **kwargs):
+        if not self.sku:
+            last_product = Product.objects.order_by('id').last()
+            if last_product:
+                new_id = last_product.id + 1
+            else:
+                new_id = 1
+            
+            self.sku = f"PRD-{new_id:04d}"
+            
+        super().save(*args, **kwargs)
+        
+            
 
-"""
-from django.utils import timezone models.DateTimeField(default=timezone.now)
-"""
+
 class StockMovement(models.Model):
     """
     Model historii operacji
