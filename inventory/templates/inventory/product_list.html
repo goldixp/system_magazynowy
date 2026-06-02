@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>Produkt</th>
+                <th>Kategoria</th>
                 <th>Kod SKU</th>
                 <th>Opis produktu</th>
                 <th>Stan magazynowy</th>
@@ -26,6 +27,7 @@
             {% for product in products %}
             <tr>
                 <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
                 <td>{{ product.sku }}</td>
                 <td>{{ product.description }}</td> 
                 <td>
