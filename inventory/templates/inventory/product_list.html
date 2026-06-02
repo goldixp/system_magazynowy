@@ -7,8 +7,12 @@
 </head>
 <body>
     <h1>Lista produktów</h1>
-    <p><a href="/movements/">Historia ruchów magazynowych</a></p>
-
+   
+    <form method="GET" action="" class="mb-3 d-flex">
+    <input type="text" name="q" class="form-control me-2" placeholder="Szukaj produktu po nazwie..." value="{{ query|default_if_none:'' }}">
+    <button type="submit" class="btn btn-outline-primary">Szukaj</button>
+    </form>
+    <br>
     <table border="1">
         <thead>
             <tr>
@@ -41,4 +45,6 @@
     </table>
 
 </body>
+ <p><a href="/movements/">Historia ruchów magazynowych</a></p>
+    <p><a href="/products/add/">Dodaj produkt</a></p>
 </html>

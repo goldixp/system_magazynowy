@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 from django.db import transaction
 from .models import Product, StockMovement
-from .forms import StockMovementForm
+from .forms import StockMovementForm, ProductForm
 
 def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'inventory/product_list.html', {'products': products})
+    query = request.GET.get('q')
+    if query:
+        products = Product.objects.filter(name__icontains=query)
+    else:
+        products = Product.objects.all()
+    
+    return render(request, 'inventory/product_list.html', {'products': products, 'query': query})
 
 def stock_movement_list(request):
     movements = StockMovement.objects.all().order_by('-created_at')
@@ -33,3 +38,15 @@ def add_stock_movement(request):
         form = StockMovementForm()
         
     return render(request, 'inventory/stock_movement_form.html', {'form': form})
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            return redirect('product_list') 
+    else:
+        form = ProductForm()
+        
+    return render(request, 'inventory/product_add_form.html', {'form': form})
+        
