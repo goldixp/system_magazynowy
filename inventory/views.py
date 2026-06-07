@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.db import transaction
 from .models import Product, StockMovement
 from .forms import StockMovementForm, ProductForm
+from django.shortcuts import render, redirect, get_object_or_404
 
 def product_list(request):
     query = request.GET.get('q')
@@ -50,3 +51,24 @@ def add_product(request):
         
     return render(request, 'inventory/product_add_form.html', {'form': form})
         
+
+def edit_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')
+    else:
+        form = ProductForm(instance=product)
+        
+    return render(request, 'inventory/product_add_form.html', {'form': form})
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    
+    if request.method == 'POST':
+        product.delete()
+        return redirect('product_list')
+        
+    return render(request, 'inventory/product_confirm_delete.html', {'product': product})

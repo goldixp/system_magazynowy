@@ -24,25 +24,24 @@
             </tr>
         </thead>
         <tbody>
-            {% for product in products %}
+          {% for product in products %}
             <tr>
                 <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
                 <td>{{ product.sku }}</td>
-                <td>{{ product.description }}</td> 
+                <td>{{ product.category }}</td>
+                <td>{{ product.current_stock }}</td>
+                
                 <td>
-                    {% if product.current_stock >= 5 %}
-                        <span style="color: green; font-weight: bold;">{{product.current_stock}} szt. </span>
-                    {% else %}
-                        <span style="color: red; font-weight: bold;">{{product.current_stock}} szt. </span>
-                    {% endif %}
+                    <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning">Edytuj</a>
+                    <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger">Usuń</a>
                 </td>
+                
             </tr>
-            {% empty %}
+        {% empty %}
             <tr>
-                <td colspan="4">Nie zarejestrowano jeszcze żadnych produktów.</td>
+                <td colspan="5">Nie zarejestrowano jeszcze żadnych produktów.</td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
 

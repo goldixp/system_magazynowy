@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzenie usunięcia</title>
+</head>
+<body>
+    <h2>Czy na pewno chcesz usunąć produkt: {{ product.name }}?</h2>
+    
+    <p><strong>SKU:</strong> {{ product.sku }}</p>
+    <p style="color: red;"><strong>Uwaga:</strong> Tej operacji nie można cofnąć!</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" style="background-color: red; color: white; padding: 10px; border: none; cursor: pointer;">Tak, usuń trwale</button>
+        <a href="{% url 'product_list' %}" style="margin-left: 15px;">Anuluj i wróć</a>
+    </form>
+</body>
+</html>
