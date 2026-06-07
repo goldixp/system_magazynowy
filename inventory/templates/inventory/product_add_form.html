@@ -7,25 +7,26 @@
 </head>
 <body class="bg-light p-5">
     <div class="container bg-white p-4 rounded shadow-sm" style="max-width: 600px;">
-        <h2 class="mb-4">Rejestracja nowego produktu</h2>
-        
-        <form method="post">
-            {% csrf_token %}
-            
-            {% if form.non_field_errors %}
-                <div class="alert alert-danger">
-                    {% for error in form.non_field_errors %}
-                        {{ error }}
-                    {% endfor %}
-                </div>
-            {% endif %}
+       <h2>
+    {% if form.instance.pk %}
+        Edycja produktu: {{ form.instance.name }}
+    {% else %}
+        Dodaj nowy produkt
+    {% endif %}
+</h2>
 
-            <div class="mb-3">
-                {{ form.as_p }}
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Zatwierdź operację</button>
-        </form>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit" class="btn btn-success">
+        {% if form.instance.pk %}
+            Zapisz zmiany
+        {% else %}
+            Dodaj do bazy
+        {% endif %}
+    </button>
+</form>
         
         <a href="{% url 'product_list' %}" class="btn btn-link w-100 mt-2 text-secondary">Anuluj i wróć</a>
     </div>
