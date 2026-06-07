@@ -54,8 +54,10 @@ def add_product(request):
 def product_detail(request,pk):
 
     product = get_object_or_404(Product, pk=pk)
+    product_url = request.build_absolute_uri()
 
-    return render(request, 'inventory/product_detail.html', {'product':product})
+    return render(request, 'inventory/product_detail.html',
+                  {'product':product, 'product_url':product_url})
     
 
 def edit_product(request, pk):
