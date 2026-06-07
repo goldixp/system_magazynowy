@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ movement.product.name }}</td> 
                 <td>
-                    {% if movement_type == 'IN' or movement.movement_type == 'PRZYJECIE' %}
+                    {% if movement.movement_type == 'IN'%}
                         <span style="color: green; font-weight: bold;">DOSTAWA</span>
                     {% else %}
                         <span style="color: red; font-weight: bold;">WYDANIE</span>

@@ -21,19 +21,28 @@
                 <th>Kod SKU</th>
                 <th>Opis produktu</th>
                 <th>Stan magazynowy</th>
+                <th>Edycja</th>
             </tr>
         </thead>
         <tbody>
           {% for product in products %}
             <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.sku }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.current_stock }}</td>
+            <td><a href="{% url 'product_detail' product.id %}" style="font-weight: bold;
+                     text-decoration: none; color: #007bff;">{{ product.name }}</a></td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.description }}</td>
+            <td> 
+            {% if product.current_stock >= 5 %}
+            <span style="color: green;font-weight: bold;"> {{ product.current_stock }} </span>
+            {% else %}
+            <span style="color: red; font-weight: bold;"> {{ product.current_stock }} </span>  
+                    {% endif %}
+                 </td>
                 
                 <td>
-                    <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning">Edytuj</a>
-                    <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger">Usuń</a>
+                    <a href="{% url 'edit_product' product.id %}"><button>EDYTUJ</button></a>
+                    <a href="{% url 'delete_product' product.id %}"><button>USUŃ</button></a>
                 </td>
                 
             </tr>

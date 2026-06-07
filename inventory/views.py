@@ -50,7 +50,13 @@ def add_product(request):
         form = ProductForm()
         
     return render(request, 'inventory/product_add_form.html', {'form': form})
-        
+
+def product_detail(request,pk):
+
+    product = get_object_or_404(Product, pk=pk)
+
+    return render(request, 'inventory/product_detail.html', {'product':product})
+    
 
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -64,6 +70,7 @@ def edit_product(request, pk):
         form = ProductForm(instance=product)
         
     return render(request, 'inventory/product_add_form.html', {'form': form})
+
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     
