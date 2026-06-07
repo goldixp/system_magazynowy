@@ -15,8 +15,28 @@ def product_list(request):
 
 def stock_movement_list(request):
     movements = StockMovement.objects.all().order_by('-created_at')
-    return render(request, 'inventory/stock_movement_list.html', {'movements': movements})
+    
+    start_date = request.GET.get('start_date', '')
+    end_date = request.GET.get('end_date', '')
+    error_message = None  
 
+   
+    if start_date and end_date and start_date > end_date:
+        error_message = "Błąd: Data końcowa nie może być wcześniejsza niż data początkowa!"
+    else:
+  
+        if start_date:
+            movements = movements.filter(created_at__gte=start_date)
+        if end_date:
+            movements = movements.filter(created_at__lte=f"{end_date} 23:59:59")
+    
+    context = {
+        'movements': movements,
+        'start_date': start_date, 
+        'end_date': end_date,
+        'error_message': error_message 
+    }
+    return render(request, 'inventory/stock_movement_list.html', context)
 def add_stock_movement(request):
     if request.method == 'POST':
         form = StockMovementForm(request.POST)

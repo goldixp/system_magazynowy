@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Product(models.Model):
     """
@@ -55,7 +56,7 @@ class StockMovement(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='movements', verbose_name="Produkt")
     movement_type = models.CharField(max_length=3, choices=MOVEMENT_CHOICES, verbose_name="Typ operacji")
     quantity = models.PositiveIntegerField(verbose_name="Ilość sztuk")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data i godzina operacji")
+    created_at = models.DateTimeField(default=timezone.now, verbose_name="Data i godzina operacji")
 
     def __str__(self):
         return f"{self.get_movement_type_display()} - {self.product.name} ({self.quantity} szt.)"
