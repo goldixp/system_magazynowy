@@ -94,7 +94,7 @@ class InventoryViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Testowy Laptop")
 
-   def test_product_create_view(self):
+    def test_product_create_view(self):
         response = self.client.get(reverse('add_product_form'))
         self.assertEqual(response.status_code, 200)
 
