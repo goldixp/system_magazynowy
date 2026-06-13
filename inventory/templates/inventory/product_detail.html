@@ -20,20 +20,63 @@
             {% endif %}
         </p>
     </div>
+
     <div style="margin-top: 30px; margin-bottom: 30px;">
         <h3>Kod QR Produktu:</h3>
         <img src="https://solsigs.com/api/qr?data={{ product_url|urlencode }}&format=png" 
-     alt="Kod QR dla {{ product.name }}" 
-     style="max-width: 200px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
-        
+             alt="Kod QR dla {{ product.name }}" 
+             style="max-width: 200px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
         <p style="color: gray;"><small>Zeskanuj ten kod telefonem, aby otworzyć stronę produktu.</small></p>
     </div>
-    <br>
+
+    <hr style="max-width: 600px; margin-left: 0;">
+
+    <div style="margin-top: 20px; border: 1px dashed #007bff; padding: 20px; max-width: 600px; background-color: #f8f9fa;">
+        <h3 style="margin-top: 0;">Szybki ruch magazynowy</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="background-color: #007bff; padding: 8px 15px; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Zapisz operację
+            </button>
+        </form>
+    </div>
+
+    <div style="margin-top: 30px; max-width: 600px;">
+        <h3>Historia ruchów magazynowych</h3>
+        {% if movements %}
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <tr style="background-color: #eee;">
+                    <th style="padding: 8px; border-bottom: 1px solid #ccc;">Data</th>
+                    <th style="padding: 8px; border-bottom: 1px solid #ccc;">Typ operacji</th>
+                    <th style="padding: 8px; border-bottom: 1px solid #ccc;">Ilość</th>
+                </tr>
+                {% for movement in movements %}
+                <tr>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ movement.created_at|date:"Y-m-d H:i" }}</td>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">
+                        {% if movement.movement_type == 'IN' %}
+                            <span style="color: green; font-weight: bold;">➕ Dostawa (IN)</span>
+                        {% else %}
+                            <span style="color: red; font-weight: bold;">➖ Wydanie (OUT)</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ movement.quantity }} szt.</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p style="color: gray;">Ten produkt nie ma jeszcze żadnej historii ruchów.</p>
+        {% endif %}
+    </div>
+
+    <br><br>
+    
     <a href="{% url 'edit_product' product.id %}" style="background-color: #ffc107; padding: 8px 15px; color: black; text-decoration: none; border-radius: 5px;">Edytuj produkt</a>
     <a href="{% url 'delete_product' product.id %}" style="background-color: #dc3545; padding: 8px 15px; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">Usuń produkt</a>
     
-    <br><br>
-    <a href="{% url 'product_list' %}">← Powrót do listy produktów</a>
+    <br><br><br>
+    <a href="{% url 'product_list' %}" style="text-decoration: none;">← Powrót do listy produktów</a>
 
 </body>
 </html>
