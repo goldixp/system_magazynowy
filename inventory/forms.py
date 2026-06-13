@@ -1,14 +1,22 @@
 from django import forms
 from .models import StockMovement, Product
 
+
 class StockMovementForm(forms.ModelForm):
     class Meta:
         model = StockMovement
         fields = ['product', 'movement_type', 'quantity']
         widgets = {
-            'product': forms.Select(attrs={'class': 'form-select'}),
-            'movement_type': forms.Select(attrs={'class': 'form-select'}),
-            'quantity': forms.NumberInput(attrs={'class': 'form-control', 'min': '1'}),
+            'product': forms.Select(
+                attrs={
+                    'class': 'form-select'}),
+            'movement_type': forms.Select(
+                attrs={
+                    'class': 'form-select'}),
+            'quantity': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'min': '1'}),
         }
 
     def clean(self):
@@ -20,12 +28,13 @@ class StockMovementForm(forms.ModelForm):
         if product and movement_type == 'OUT' and quantity:
             if product.current_stock < quantity:
                 raise forms.ValidationError(
-                    f"Niewystarczająca ilość towaru w magazynie! Dostępne: {product.current_stock} szt."
-                )
-        
+                    f"Niewystarczająca ilość towaru w magazynie! Dostępne: {
+                        product.current_stock} szt.")
+
         return cleaned_data
-    
+
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'category', 'current_stock'] 
+        fields = ['name', 'description', 'category', 'current_stock']

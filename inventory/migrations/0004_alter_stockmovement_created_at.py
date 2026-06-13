@@ -14,6 +14,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='stockmovement',
             name='created_at',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Data i godzina operacji'),
+            field=models.DateTimeField(
+                default=django.utils.timezone.now,
+                verbose_name='Data i godzina operacji'),
         ),
     ]

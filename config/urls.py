@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from inventory.views import add_product,product_list, stock_movement_list, add_stock_movement
+from inventory.views import add_product, product_list, stock_movement_list, add_stock_movement
 from inventory import views
 
 urlpatterns = [
