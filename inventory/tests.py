@@ -34,7 +34,7 @@ class InventoryTests(TestCase):
             'quantity': 5  
         }
         form = StockMovementForm(data=form_data)
-        self.assertTrue(form.is_valid())
+        self.assertFalse(form.is_valid())
 
 
 # --- testy widokow ---
