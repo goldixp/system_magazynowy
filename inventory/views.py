@@ -71,14 +71,47 @@ def add_product(request):
         
     return render(request, 'inventory/product_add_form.html', {'form': form})
 
-def product_detail(request,pk):
-
+def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product_url = request.build_absolute_uri()
-
-    return render(request, 'inventory/product_detail.html',
-                  {'product':product, 'product_url':product_url})
     
+    # Wyciągamy historię ruchów TYLKO dla tego produktu
+    movements = StockMovement.objects.filter(product=product).order_by('-created_at')
+
+    # Obsługa formularza na tej samej stronie
+    if request.method == 'POST':
+        form = StockMovementForm(request.POST)
+        if form.is_valid():
+            with transaction.atomic():
+                movement = form.save(commit=False)
+                # Nadpisujemy produkt z formularza tym, na którego stronie jesteśmy
+                movement.product = product
+                
+                # Zabezpieczamy produkt do edycji
+                locked_product = Product.objects.select_for_update().get(id=product.id)
+                
+                if movement.movement_type == 'IN':
+                    locked_product.current_stock += movement.quantity
+                elif movement.movement_type == 'OUT':
+                    locked_product.current_stock -= movement.quantity
+                
+                locked_product.save()
+                movement.save()
+                
+            # Po zapisaniu odświeżamy stronę szczegółów produktu
+            return redirect('product_detail', pk=product.pk)
+    else:
+        # Inicjujemy pusty formularz, ustawiając domyślny produkt
+        form = StockMovementForm(initial={'product': product})
+
+    context = {
+        'product': product, 
+        'product_url': product_url,
+        'movements': movements,
+        'form': form
+    }
+    
+    return render(request, 'inventory/product_detail.html', context)
 
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
