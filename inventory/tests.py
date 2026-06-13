@@ -94,23 +94,20 @@ class InventoryViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Testowy Laptop")
 
-    def test_product_create_view(self):
-        # widok dodawania produktu
-        response = self.client.get(reverse('product_create'))
+   def test_product_create_view(self):
+        response = self.client.get(reverse('add_product_form'))
         self.assertEqual(response.status_code, 200)
 
     def test_product_update_view(self):
-        # widok edycji produktu
         response = self.client.get(
             reverse(
-                'product_update', args=[
+                'edit_product', args=[
                     self.product.id]))
         self.assertEqual(response.status_code, 200)
 
     def test_product_delete_view(self):
-        # strona potwierdzenia usuniecia
         response = self.client.get(
             reverse(
-                'product_delete', args=[
+                'delete_product', args=[
                     self.product.id]))
         self.assertEqual(response.status_code, 200)
