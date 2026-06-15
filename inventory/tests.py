@@ -67,7 +67,7 @@ class InventoryViewsTest(TestCase):
                     self.product.id]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Testowy Laptop")
-        self.assertContains(response, "solsigs")
+        self.assertContains(response, "qrserver")
 
     def test_stock_movement_list_date_filter(self):
         # pusta lista (bez filtrowania)
