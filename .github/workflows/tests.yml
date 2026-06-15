@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Pobranie kodu
       uses: actions/checkout@v4
@@ -38,6 +38,9 @@ jobs:
         flake8 . --exclude=venv,migrations --max-line-length=120
 
     - name: Testy jednostkowe
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DEBUG: ${{ vars.DEBUG }}
       run: |
         coverage run manage.py test
         coverage report
