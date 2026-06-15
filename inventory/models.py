@@ -15,10 +15,6 @@ class Product(models.Model):
         ('Inne', 'Inne'),
     ]
 
-    category = models.CharField(
-        max_length=50,
-        choices=CATEGORY_CHOICES,
-        default='Inne')
     name = models.CharField(max_length=255, verbose_name="Nazwa produktu")
     sku = models.CharField(max_length=50, unique=True)
     category = models.CharField(
