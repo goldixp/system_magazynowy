@@ -1,0 +1,47 @@
+[33m7f46bec[m docs: aktualizacja dokumentacji i testów
+[33m308c49d[m chore: konfiguracja zmiennych środowiskowych, wymagań i plików ignorowanych
+[33m8c9cf7d[m fix: zmiana API na api.qrserver.com
+[33mf4c6426[m fix: domkniecie ucietego tagu HTML z QR
+[33mb0ac662[m fix: ostateczne naprawienie blokady CSRF
+[33m7d6ad49[m Merge pull request #20 from goldixp/chore/github-actions
+[33mcadf97d[m chore: dodanie automatycznych migracji do obrazu Docker
+[33m6b9825b[m Merge pull request #19 from goldixp/chore/github-actions
+[33m3922f60[m fix: poprawa spacji i wciec w testach
+[33m75ab0f0[m Merge pull request #18 from goldixp/chore/github-actions
+[33m363e75a[m fix: naprawa nazw URL w testach
+[33m1df4957[m Merge pull request #17 from goldixp/chore/github-actions
+[33m6613e5d[m Poprawa testu
+[33mbbb2413[m Merge pull request #16 from goldixp/chore/github-actions
+[33m4fb0006[m style: automatyczne formatowanie kodu pod wymogi lintera flake8
+[33m25a8628[m Merge pull request #15 from goldixp/chore/github-actions
+[33m14cc309[m Configure GitHub Actions CI pipeline
+[33m0fd980a[m Merge pull request #14 from goldixp/chore/github-actions
+[33m9e19762[m chore: dodanie GitHub Actions do automatycznych testów (Faza 4)
+[33mb6035ea[m Merge pull request #13 from goldixp/chore/docker-setup
+[33m2ef34b9[m chore: dodanie konteneryzacji Docker (Faza 3)
+[33m56ff4da[m Merge pull request #12 from goldixp/feature/product-history
+[33m38acf56[m feat: dodanie historii ruchów i formularza do widoku szczegółów produktu
+[33meeb9f87[m Merge pull request #11 from goldixp/test/coverage-update
+[33m6f00cef[m test: dodanie testów
+[33m9cfa54c[m feat: dodanie filtrowania ruchów magazynowych z kalendarzem i walidacją
+[33mfd84ad3[m Merge pull request #10 from goldixp/feature/qr-api
+[33m2e699fc[m feat: dodanie kodów QR przez zewnętrzne API solsigs
+[33m18de0e3[m Merge pull request #9 from goldixp/feature/product-detail
+[33m931e731[m feat: dodanie widoku szczegółowego dla pojedynczego produktu
+[33md0f61e0[m Merge pull request #8 from goldixp/feature/product-edit-delete
+[33mc859640[m feat: dodanie operacji edycji i usuwania dla produktów (pełny CRUD)
+[33m0146a2c[m Merge pull request #7 from goldixp/feature/category-sku
+[33m94c561b[m Merge pull request #6 from goldixp/main
+[33m74d8496[m feat: dodanie kategorii produktów i bezpiecznej numeracji SKU
+[33m7a78863[m Merge pull request #5 from goldixp/feature/search-and-sku
+[33ma8023d1[m feat: dodanie wyszukiwarki, automatycznego generowania SKU oraz formularza dodawania produktów
+[33m9b9572e[m Merge pull request #4 from goldixp/feature/tests
+[33mb57705b[m test: dodanie testów walidacji formularza, blokada SKU i osiągnięcie 82% pokrycia
+[33m7eadb3c[m feat: dodanie formularza operacji magazynowych i zabezpieczeń transakcyjnych
+[33m52acfef[m Merge pull request #3 from goldixp/feature/product-crud
+[33m6578633[m feat: dodanie widoków produktów i ruchów magazynowych
+[33m6fc7d48[m Merge pull request #2 from goldixp/feature/db-migrations
+[33m965b47a[m chore: konfiguracja bazy danych i rejestracja modeli w panelu admina
+[33maf62258[m Merge pull request #1 from goldixp/feature/setup-readme
+[33m244a2ab[m docs: utworzenie pliku README z opisem systemu magazynowego
+[33mf591d00[m feat: inicjalizacja projektu Django, dodanie licencji i gitignore
